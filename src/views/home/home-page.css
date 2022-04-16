@@ -1,0 +1,15 @@
+.home_page {
+  /* border: 1px solid red; */
+}
+
+.home_page-card_wrapper {
+  /* border: 1px solid green; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 72px);
+}
+
+.home_page-card_wrapper-card {
+  border-radius: 8px;
+}

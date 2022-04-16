@@ -1,11 +1,15 @@
-import { Button } from "antd";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Views from "./views";
 
 const App = () => {
   return (
     <div className="App">
-      Hello world
+      <Router>
+        <Views />
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
