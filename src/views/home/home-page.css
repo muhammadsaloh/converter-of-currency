@@ -1,15 +1,16 @@
-.home_page {
-  /* border: 1px solid red; */
-}
-
 .home_page-card_wrapper {
-  /* border: 1px solid green; */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: calc(100vh - 72px);
+  margin-top: 80px;
 }
 
 .home_page-card_wrapper-card {
   border-radius: 8px;
+}
+
+.flex {
+  display: flex;
+  justify-content: flex-end;
 }
