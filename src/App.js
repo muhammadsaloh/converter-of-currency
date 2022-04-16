@@ -1,5 +1,6 @@
+import { Button } from "antd";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       Hello world
