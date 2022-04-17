@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: calc(100vh - 72px);
   margin-top: 80px;
 }
 
@@ -10,7 +9,6 @@
   border-radius: 8px;
 }
 
-.flex {
-  display: flex;
-  justify-content: flex-end;
+.home_page-card_wrapper-card-input {
+  -webkit-appearance: none;
 }

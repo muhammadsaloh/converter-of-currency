@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   amountCurrency: "0",
-  baseCurrency: "",
-  targetCurrency: "",
+  baseCurrency: "EUR",
+  targetCurrency: "USD",
 };
 
 export const CurrencyReducer = (state = INITIAL_STATE, action) => {
@@ -12,6 +12,11 @@ export const CurrencyReducer = (state = INITIAL_STATE, action) => {
         amountCurrency: action.payload.amountCurrency,
         baseCurrency: action.payload.baseCurrency,
         targetCurrency: action.payload.targetCurrency,
+      };
+    case "/set-base":
+      return {
+        ...state,
+        baseCurrency: action.payload.baseCurrency,
       };
     default:
       return state;

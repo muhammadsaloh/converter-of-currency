@@ -1,0 +1,29 @@
+.currency_page-card_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 80px;
+}
+
+.currency_page-card_wrapper-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.currency_page-card_wrapper-list-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 5px 8px;
+  margin: 10px 0px;
+}
+
+.currency_page-card_wrapper-list-item h1 {
+  margin: 0;
+}
+
+.currency_page-card_wrapper-list-item h1:nth-child(2) {
+  margin-left: 20px;
+  margin-right: 20px;
+}

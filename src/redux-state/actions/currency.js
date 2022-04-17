@@ -1,8 +1,15 @@
-export const setBaseCurrency = (data) => ({
+export const setCurrency = (data) => ({
   type: "/set",
   payload: {
-    amountCurrency: data.amountCurrency,
-    baseCurrency: data.baseCurrency,
-    targetCurrency: data.targetCurrency,
+    amountCurrency: data.amount,
+    baseCurrency: data.from,
+    targetCurrency: data.to,
+  },
+});
+
+export const setBaseCurrency = (base) => ({
+  type: "/set-base",
+  payload: {
+    baseCurrency: base,
   },
 });

@@ -1,5 +1,5 @@
 # Convertor of currency
-React SPA
+React SPA of currency converter
 
 ## Tech Stack Used
 - 1.javascript.

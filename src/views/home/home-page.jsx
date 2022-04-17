@@ -1,24 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useConvert } from "../../services/requests/get-currency";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrency } from "../../redux-state/actions/currency";
 import { PageHeader, Card, Input, Form, Select, Space } from "antd";
 import currency from "../../assets/currency.json";
 import "./home-page.css";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state.currency);
+
   const [allValues, setAllValues] = useState({
-    amount: 0,
-    from: "EUR",
-    to: "USD",
+    amount: store.amountCurrency,
+    from: store.baseCurrency,
+    to: store.targetCurrency,
   });
 
-  const { data, loading } = useConvert(
-    allValues.amount,
-    allValues.from,
-    allValues.to
+  const { data, error, loading } = useConvert(
+    store.amountCurrency || 0,
+    store.baseCurrency,
+    store.targetCurrency
   );
 
-  const inputHandleChange = (element) =>
-    setAllValues({ ...allValues, amount: element.target.value });
+  useEffect(() => {
+    dispatch(setCurrency(allValues));
+  }, [allValues]);
+
+  const inputHandleChange = (element) => {
+    const handler = setTimeout(
+      () => setAllValues({ ...allValues, amount: element.target.value }),
+      250
+    );
+
+    return () => clearTimeout(handler);
+  };
 
   const baseCurrencyChange = (element) =>
     setAllValues({ ...allValues, from: element });
@@ -31,7 +47,7 @@ const HomePage = () => {
       <PageHeader
         className="site-page-header"
         title="Home Page"
-        subTitle="You can canvert currency"
+        subTitle={<Link to={"/currency-page"}>Currency Page</Link>}
       />
       <div className="home_page-card_wrapper">
         <Card className="home_page-card_wrapper-card">
@@ -40,15 +56,24 @@ const HomePage = () => {
               <Form.Item
                 label="Amount"
                 name="amount"
-                initialValue={0}
+                initialValue={store.amountCurrency}
                 rules={[
                   { required: true, message: "Please input your amount!" },
                 ]}
               >
-                <Input placeholder="Amount" onChange={inputHandleChange} />
+                <Input
+                  className="home_page-card_wrapper-card-input"
+                  type="number"
+                  placeholder="Amount"
+                  onChange={inputHandleChange}
+                />
               </Form.Item>
 
-              <Form.Item label="From" name="from" initialValue="USD">
+              <Form.Item
+                label="From"
+                name="from"
+                initialValue={store.baseCurrency}
+              >
                 <Select placeholder="Currency" onChange={baseCurrencyChange}>
                   {currency.datas.map((item, idx) => (
                     <Select.Option key={idx} value={item}>
@@ -58,7 +83,11 @@ const HomePage = () => {
                 </Select>
               </Form.Item>
 
-              <Form.Item label="To" name="to" initialValue="EUR">
+              <Form.Item
+                label="To"
+                name="to"
+                initialValue={store.targetCurrency}
+              >
                 <Select placeholder="Currency" onChange={targetCurrencyChange}>
                   {currency.datas.map((item, idx) => (
                     <Select.Option key={idx} value={item}>
@@ -68,18 +97,20 @@ const HomePage = () => {
                 </Select>
               </Form.Item>
             </Space>
-            {loading ? (
+            {error ? (
+              <h1>Error</h1>
+            ) : loading ? (
               <h1>Loading...</h1>
             ) : (
-              <>
+              <React.Fragment>
                 <h1>
-                  {allValues.amount} {allValues.from} =
+                  {store.amountCurrency} {store.baseCurrency} =
                 </h1>
                 <br />
                 <h1>
-                  {data?.conversion_result} {allValues.to}
+                  {data?.conversion_result} {store.targetCurrency}
                 </h1>
-              </>
+              </React.Fragment>
             )}
           </Form>
         </Card>
