@@ -21,12 +21,12 @@ const HomePage = () => {
     to: store.targetCurrency,
   });
 
-  const { data, error, loading } = useConvert(store);
+  const { data, error, isLoading } = useConvert(store);
 
   useEffect(() => {
     dispatch(setCurrency(allValues));
   }, [allValues]);
-
+  
   const inputHandleChange = (element: any) => {
     const handler = setTimeout(
       () => setAllValues({ ...allValues, amount: element.target.value }),
@@ -97,7 +97,7 @@ const HomePage = () => {
             </Space>
             {error ? (
               <h1>Error</h1>
-            ) : loading ? (
+            ) : isLoading ? (
               <h1>Loading...</h1>
             ) : (
               <React.Fragment>

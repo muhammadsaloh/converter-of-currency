@@ -11,7 +11,7 @@ const CurrencyPage = () => {
   const dispatch = useDispatch();
   const store = useSelector((state: any) => state.currency);
   const [currency, setCurrency] = useState(store.baseCurrency);
-  const { data, loading, error } = useCurrency(store.baseCurrency);
+  const { data, isLoading, error } = useCurrency(store.baseCurrency);
 
   const HandleChange = (currency: string) => setCurrency(currency);
 
@@ -44,7 +44,7 @@ const CurrencyPage = () => {
         >
           {error ? (
             <h1>Error</h1>
-          ) : loading ? (
+          ) : isLoading ? (
             <h1>Loading...</h1>
           ) : (
             <List>
