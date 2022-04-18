@@ -1,12 +1,12 @@
 import { ICurrencyRedux } from "../../types/currency.types";
 
-const INITIAL_STATE = {
+const initialState = {
   amountCurrency: "0",
   baseCurrency: "EUR",
   targetCurrency: "USD",
 } as ICurrencyRedux;
 
-export const CurrencyReducer = (state = INITIAL_STATE, action: any) => {
+export const CurrencyReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case "/set":
       return {
