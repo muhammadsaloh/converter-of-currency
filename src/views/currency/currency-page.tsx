@@ -5,7 +5,7 @@ import currencyData from "../../assets/currency.json";
 import { useDispatch, useSelector } from "react-redux";
 import { setBaseCurrency } from "../../redux-state/actions/currency";
 import { Card, PageHeader, Select } from "antd";
-import "./currency-page.css";
+import { CardWrappper, List, ListItem, Title } from "./currency-styles";
 
 const CurrencyPage = () => {
   const dispatch = useDispatch();
@@ -20,13 +20,12 @@ const CurrencyPage = () => {
   }, [currency]);
 
   return (
-    <div className="currency_page">
+    <div>
       <PageHeader
-        className="site-page-header"
         title="Currency Page"
         subTitle={<Link to={"/"}>Home Page</Link>}
       />
-      <div className="currency_page-card_wrapper">
+      <CardWrappper>
         <Card
           title="Currency"
           extra={
@@ -48,32 +47,32 @@ const CurrencyPage = () => {
           ) : loading ? (
             <h1>Loading...</h1>
           ) : (
-            <ul className="currency_page-card_wrapper-list">
-              <li className="currency_page-card_wrapper-list-item">
-                <h1>1 USD</h1>
-                <h1>=</h1>
-                <h1>
+            <List>
+              <ListItem>
+                <Title>1 USD</Title>
+                <Title>=</Title>
+                <Title>
                   {data?.conversion_rates.USD} {store.baseCurrency}
-                </h1>
-              </li>
-              <li className="currency_page-card_wrapper-list-item">
-                <h1>1 EUR</h1>
-                <h1>=</h1>
-                <h1>
+                </Title>
+              </ListItem>
+              <ListItem>
+                <Title>1 EUR</Title>
+                <Title>=</Title>
+                <Title>
                   {data?.conversion_rates.EUR} {store.baseCurrency}
-                </h1>
-              </li>
-              <li className="currency_page-card_wrapper-list-item">
-                <h1>1 USZ</h1>
-                <h1>=</h1>
-                <h1>
+                </Title>
+              </ListItem>
+              <ListItem>
+                <Title>1 USZ</Title>
+                <Title>=</Title>
+                <Title>
                   {data?.conversion_rates.UZS} {store.baseCurrency}
-                </h1>
-              </li>
-            </ul>
+                </Title>
+              </ListItem>
+            </List>
           )}
         </Card>
-      </div>
+      </CardWrappper>
     </div>
   );
 };

@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { useConvert } from "../../hooks/query/get-currency";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrency } from "../../redux-state/actions/currency";
-import { PageHeader, Card, Input, Form, Select, Space } from "antd";
+import { PageHeader, Form, Select, Space } from "antd";
 import currency from "../../assets/currency.json";
-import "./home-page.css";
+import {
+  CardWrapper,
+  StyledCard,
+  StyledInput,
+} from "./currency-converter-styles";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -39,14 +43,13 @@ const HomePage = () => {
     setAllValues({ ...allValues, to: element });
 
   return (
-    <div className="home_page">
+    <div>
       <PageHeader
-        className="site-page-header"
         title="Home Page"
         subTitle={<Link to={"/currency-page"}>Currency Page</Link>}
       />
-      <div className="home_page-card_wrapper">
-        <Card className="home_page-card_wrapper-card">
+      <CardWrapper>
+        <StyledCard>
           <Form autoComplete="off" layout="vertical">
             <Space align="center">
               <Form.Item
@@ -57,8 +60,7 @@ const HomePage = () => {
                   { required: true, message: "Please input your amount!" },
                 ]}
               >
-                <Input
-                  className="home_page-card_wrapper-card-input"
+                <StyledInput
                   type="number"
                   placeholder="Amount"
                   onChange={inputHandleChange}
@@ -109,8 +111,8 @@ const HomePage = () => {
               </React.Fragment>
             )}
           </Form>
-        </Card>
-      </div>
+        </StyledCard>
+      </CardWrapper>
     </div>
   );
 };
