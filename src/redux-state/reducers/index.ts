@@ -5,7 +5,7 @@ const appReducer = combineReducers({
   currency: CurrencyReducer,
 });
 
-const rootReducer = (state, action) => {
+const rootReducer = (state: any, action: any) => {
   return appReducer(state, action);
 };
 

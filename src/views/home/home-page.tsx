@@ -9,7 +9,7 @@ import "./home-page.css";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const store = useSelector((state) => state.currency);
+  const store = useSelector((state: any) => state.currency);
 
   const [allValues, setAllValues] = useState({
     amount: store.amountCurrency,
@@ -17,17 +17,13 @@ const HomePage = () => {
     to: store.targetCurrency,
   });
 
-  const { data, error, loading } = useConvert(
-    store.amountCurrency || 0,
-    store.baseCurrency,
-    store.targetCurrency
-  );
+  const { data, error, loading } = useConvert(store);
 
   useEffect(() => {
     dispatch(setCurrency(allValues));
   }, [allValues]);
 
-  const inputHandleChange = (element) => {
+  const inputHandleChange = (element: any) => {
     const handler = setTimeout(
       () => setAllValues({ ...allValues, amount: element.target.value }),
       250
@@ -36,10 +32,10 @@ const HomePage = () => {
     return () => clearTimeout(handler);
   };
 
-  const baseCurrencyChange = (element) =>
+  const baseCurrencyChange = (element: string) =>
     setAllValues({ ...allValues, from: element });
 
-  const targetCurrencyChange = (element) =>
+  const targetCurrencyChange = (element: string) =>
     setAllValues({ ...allValues, to: element });
 
   return (

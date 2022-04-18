@@ -9,11 +9,11 @@ import "./currency-page.css";
 
 const CurrencyPage = () => {
   const dispatch = useDispatch();
-  const store = useSelector((state) => state.currency);
+  const store = useSelector((state: any) => state.currency);
   const [currency, setCurrency] = useState(store.baseCurrency);
   const { data, loading, error } = useCurrency(store.baseCurrency);
 
-  const HandleChange = (currency) => setCurrency(currency);
+  const HandleChange = (currency: string) => setCurrency(currency);
 
   useEffect(() => {
     dispatch(setBaseCurrency(currency));

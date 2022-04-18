@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
+import { ICurrency } from "../../types/currency.types";
 import { request } from "../api";
 
-export const useConvert = (amount, base, target) => {
-  const [data, setData] = useState(null);
+export const useConvert = (currency: ICurrency) => {
+  const [data, setData] = useState<any>(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
-  }, [base, target, amount]);
+  }, [currency.from, currency.to, currency.amount]);
 
   async function getData() {
     const response = await request
-      .get(`/pair/${base}/${target}/${amount}/`)
+      .get(`/pair/${currency.from}/${currency.to}/${currency.amount || 0}/`)
       .then((res) => {
         setData(res.data);
       })
@@ -29,18 +30,18 @@ export const useConvert = (amount, base, target) => {
   return { data, error, loading };
 };
 
-export const useCurrency = (base) => {
-  const [data, setData] = useState(null);
+export const useCurrency = (from: string) => {
+  const [data, setData] = useState<any>(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
-  }, [base]);
+  }, [from]);
 
   async function getData() {
     const response = await request
-      .get(`/latest/${base}/`)
+      .get(`/latest/${from}/`)
       .then((res) => {
         setData(res.data);
       })
