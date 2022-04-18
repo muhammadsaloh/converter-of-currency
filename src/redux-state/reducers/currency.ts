@@ -4,12 +4,9 @@ const INITIAL_STATE = {
   amountCurrency: "0",
   baseCurrency: "EUR",
   targetCurrency: "USD",
-};
+} as ICurrencyRedux;
 
-export const CurrencyReducer = (
-  state: ICurrencyRedux = INITIAL_STATE,
-  action: any
-) => {
+export const CurrencyReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
     case "/set":
       return {

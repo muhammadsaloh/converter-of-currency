@@ -44,8 +44,8 @@ const HomePage = () => {
   return (
     <div>
       <PageHeader
-        title="Home Page"
-        subTitle={<Link to={"/currency-page"}>Currency Page</Link>}
+        title="Convert Currency"
+        subTitle={<Link to={"/currency-page"}>Daily Currency</Link>}
       />
       <CardWrapper>
         <StyledCard>
