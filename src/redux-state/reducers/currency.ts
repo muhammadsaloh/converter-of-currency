@@ -1,24 +1,27 @@
-import { ICurrency } from "../../types/currency.types";
+import { ICurrencyRedux } from "../../types/currency.types";
 
 const INITIAL_STATE = {
-  amount: "0",
-  from: "EUR",
-  to: "USD",
+  amountCurrency: "0",
+  baseCurrency: "EUR",
+  targetCurrency: "USD",
 };
 
-export const CurrencyReducer = (state: ICurrency = INITIAL_STATE, action: any) => {
+export const CurrencyReducer = (
+  state: ICurrencyRedux = INITIAL_STATE,
+  action: any
+) => {
   switch (action.type) {
     case "/set":
       return {
         ...state,
-        amount: action.payload.amount,
-        from: action.payload.from,
-        to: action.payload.to,
+        amountCurrency: action.payload.amountCurrency,
+        baseCurrency: action.payload.baseCurrency,
+        targetCurrency: action.payload.targetCurrency,
       };
     case "/set-base":
       return {
         ...state,
-        from: action.payload.from,
+        baseCurrency: action.payload.baseCurrency,
       };
     default:
       return state;

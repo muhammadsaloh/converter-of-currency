@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useConvert } from "../../hooks/query/get-currency";
+import { useSearch } from "../../hooks/mutation/use-currency";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrency } from "../../redux-state/actions/currency";
 import { PageHeader, Form, Select, Space } from "antd";
@@ -14,6 +14,7 @@ import {
 const HomePage = () => {
   const dispatch = useDispatch();
   const store = useSelector((state: any) => state.currency);
+  const searchMutation = useSearch();
 
   const [allValues, setAllValues] = useState({
     amount: store.amountCurrency,
@@ -21,17 +22,15 @@ const HomePage = () => {
     to: store.targetCurrency,
   });
 
-  const { data, error, isLoading } = useConvert(store);
-
   useEffect(() => {
     dispatch(setCurrency(allValues));
+    searchMutation.mutate(allValues);
   }, [allValues]);
-  
+
   const inputHandleChange = (element: any) => {
-    const handler = setTimeout(
-      () => setAllValues({ ...allValues, amount: element.target.value }),
-      250
-    );
+    const handler = setTimeout(() => {
+      setAllValues({ ...allValues, amount: element.target.value });
+    }, 250);
 
     return () => clearTimeout(handler);
   };
@@ -95,9 +94,9 @@ const HomePage = () => {
                 </Select>
               </Form.Item>
             </Space>
-            {error ? (
+            {searchMutation.error ? (
               <h1>Error</h1>
-            ) : isLoading ? (
+            ) : searchMutation.isLoading ? (
               <h1>Loading...</h1>
             ) : (
               <React.Fragment>
@@ -106,7 +105,8 @@ const HomePage = () => {
                 </h1>
                 <br />
                 <h1>
-                  {data?.conversion_result} {store.targetCurrency}
+                  {searchMutation.data?.conversion_result}{" "}
+                  {store.targetCurrency}
                 </h1>
               </React.Fragment>
             )}

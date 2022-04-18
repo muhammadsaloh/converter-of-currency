@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useCurrency } from "../../hooks/query/get-currency";
+import { useUSD, useEUR, useUZS } from "../../hooks/mutation/use-currency";
 import currencyData from "../../assets/currency.json";
 import { useDispatch, useSelector } from "react-redux";
 import { setBaseCurrency } from "../../redux-state/actions/currency";
@@ -10,14 +10,19 @@ import { CardWrappper, List, ListItem, Title } from "./currency-styles";
 const CurrencyPage = () => {
   const dispatch = useDispatch();
   const store = useSelector((state: any) => state.currency);
-  const [currency, setCurrency] = useState(store.baseCurrency);
-  const { data, isLoading, error } = useCurrency(store.baseCurrency);
+  const usdMutation = useUSD();
+  const eurMutation = useEUR();
+  const uzsMutation = useUZS();
 
-  const HandleChange = (currency: string) => setCurrency(currency);
+  const HandleChange = (currency: string) => {
+    dispatch(setBaseCurrency(currency));
+  };
 
   useEffect(() => {
-    dispatch(setBaseCurrency(currency));
-  }, [currency]);
+    usdMutation.mutate(store.baseCurrency);
+    eurMutation.mutate(store.baseCurrency);
+    uzsMutation.mutate(store.baseCurrency);
+  }, [store.baseCurrency]);
 
   return (
     <div>
@@ -42,9 +47,9 @@ const CurrencyPage = () => {
             </Select>
           }
         >
-          {error ? (
+          {usdMutation.error ? (
             <h1>Error</h1>
-          ) : isLoading ? (
+          ) : usdMutation.isLoading ? (
             <h1>Loading...</h1>
           ) : (
             <List>
@@ -52,21 +57,21 @@ const CurrencyPage = () => {
                 <Title>1 USD</Title>
                 <Title>=</Title>
                 <Title>
-                  {data?.conversion_rates.USD} {store.baseCurrency}
+                  {usdMutation.data?.conversion_result} {store.baseCurrency}
                 </Title>
               </ListItem>
               <ListItem>
                 <Title>1 EUR</Title>
                 <Title>=</Title>
                 <Title>
-                  {data?.conversion_rates.EUR} {store.baseCurrency}
+                  {eurMutation.data?.conversion_result} {store.baseCurrency}
                 </Title>
               </ListItem>
               <ListItem>
                 <Title>1 USZ</Title>
                 <Title>=</Title>
                 <Title>
-                  {data?.conversion_rates.UZS} {store.baseCurrency}
+                  {uzsMutation.data?.conversion_result} {store.baseCurrency}
                 </Title>
               </ListItem>
             </List>
