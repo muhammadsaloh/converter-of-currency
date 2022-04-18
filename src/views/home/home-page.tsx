@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useConvert } from "../../services/requests/get-currency";
+import { useConvert } from "../../hooks/query/get-currency";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrency } from "../../redux-state/actions/currency";
 import { PageHeader, Card, Input, Form, Select, Space } from "antd";

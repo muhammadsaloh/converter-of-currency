@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ICurrency } from "../../types/currency.types";
-import { request } from "../api";
+import { request } from "../../services/api"
 
 export const useConvert = (currency: ICurrency) => {
   const [data, setData] = useState<any>(null);

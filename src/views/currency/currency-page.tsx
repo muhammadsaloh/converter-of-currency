@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useCurrency } from "../../services/requests/get-currency";
+import { useCurrency } from "../../hooks/query/get-currency";
 import currencyData from "../../assets/currency.json";
 import { useDispatch, useSelector } from "react-redux";
 import { setBaseCurrency } from "../../redux-state/actions/currency";
