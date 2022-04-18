@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import { useUSD, useEUR, useUZS } from "../../hooks/mutation/use-currency";
 import currencyData from "../../assets/currency.json";
 import { useDispatch, useSelector } from "react-redux";
+import { IState } from "../../types/redux.types";
 import { setBaseCurrency } from "../../redux-state/actions/currency";
 import { Card, PageHeader, Select } from "antd";
 import { CardWrappper, List, ListItem, Title } from "./currency-styles";
 
 const CurrencyPage = () => {
   const dispatch = useDispatch();
-  const store = useSelector((state: any) => state.currency);
+  const store = useSelector((state: IState) => state.currency);
+
   const usdMutation = useUSD();
   const eurMutation = useEUR();
   const uzsMutation = useUZS();

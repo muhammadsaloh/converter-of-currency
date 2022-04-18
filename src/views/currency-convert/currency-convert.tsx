@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSearch } from "../../hooks/mutation/use-currency";
+import { IState } from "../../types/redux.types"; 
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrency } from "../../redux-state/actions/currency";
 import { PageHeader, Form, Select, Space } from "antd";
@@ -13,7 +14,7 @@ import {
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const store = useSelector((state: any) => state.currency);
+  const store = useSelector((state: IState) => state.currency);
   const searchMutation = useSearch();
 
   const [allValues, setAllValues] = useState({
@@ -27,7 +28,7 @@ const HomePage = () => {
     searchMutation.mutate(allValues);
   }, [allValues]);
 
-  const inputHandleChange = (element: any) => {
+  const inputHandleChange = (element: React.ChangeEvent<HTMLInputElement>) => {
     const handler = setTimeout(() => {
       setAllValues({ ...allValues, amount: element.target.value });
     }, 250);

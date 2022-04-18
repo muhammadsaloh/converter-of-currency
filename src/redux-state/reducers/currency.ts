@@ -1,4 +1,5 @@
 import { ICurrencyRedux } from "../../types/currency.types";
+import { IAction } from "../../types/redux.types";
 
 const initialState = {
   amountCurrency: "0",
@@ -6,7 +7,7 @@ const initialState = {
   targetCurrency: "USD",
 } as ICurrencyRedux;
 
-export const CurrencyReducer = (state = initialState, action: any) => {
+export const CurrencyReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case "/set":
       return {

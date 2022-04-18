@@ -9,7 +9,6 @@ export const useSearch = () =>
       .then((res) => res.data)
   );
 
-
 export const useUSD = () =>
   useMutation((from: string) =>
     request.get(`/pair/USD/${from}/1`).then((res) => res.data)
