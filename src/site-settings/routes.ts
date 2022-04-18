@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 // App Pages
-const HomePage = lazy(() => import("../views/home/home-page"));
+const HomePage = lazy(() => import("../views/currency-convert/currency-convert"));
 const CurrencyPage = lazy(() => import("../views/currency/currency-page"));
 
 const Routes = {

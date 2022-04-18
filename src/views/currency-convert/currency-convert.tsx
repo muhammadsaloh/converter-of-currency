@@ -9,7 +9,7 @@ import {
   CardWrapper,
   StyledCard,
   StyledInput,
-} from "./currency-converter-styles";
+} from "./currency-convert-styles";
 
 const HomePage = () => {
   const dispatch = useDispatch();
